@@ -1,0 +1,44 @@
+var React = require("react");
+var BackboneMixin = require("../mixins/BackboneMixin.js");
+
+var People = require("../models/People");
+var Hello = require("../components/Hello.jsx");
+
+var PeopleList = React.createClass({
+  displayName: "People",
+
+  mixins: [BackboneMixin],
+
+  getInitialState: function() {
+    return {
+      people: new People()
+    };
+  },
+
+  componentWillMount: function() {
+    // get data
+    this.state.people.fetch();
+  },
+
+  getBackboneModels: function() {
+    return [this.state.people];
+  },
+
+  render: function() {
+    var peopleList = this.state.people.models.map(function (person, index) {
+
+      /* jshint trailing:false, quotmark:false, newcap:false */
+      return (
+        <Hello key={index} person={person} />
+      );
+    });
+
+    return (
+      <div>
+        {peopleList}
+      </div>
+    );
+  }
+});
+
+module.exports = PeopleList;
