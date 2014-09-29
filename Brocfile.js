@@ -58,12 +58,12 @@ var appImg = pickFiles(imgDir, {
 });
 
 // create tree for api files
-var appImg = pickFiles(apiDir, {
+var appApi = pickFiles(apiDir, {
   srcDir: "/",
   destDir: apiDistDir,
 });
 
-var publicFiles = new mergeTrees([index, appImg], { overwrite: true });
+var publicFiles = new mergeTrees([index, appImg, appApi], { overwrite: true });
 
 if (env === "production") {
 
