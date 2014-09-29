@@ -1,4 +1,4 @@
-# Frontend for Mesosphere Manager
+# React and Backbone with Broccoli and Webpack
 
 ### Setup development environment
 
