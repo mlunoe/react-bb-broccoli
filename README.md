@@ -1,8 +1,8 @@
 # React + Backbone <3 Broccoli + Webpack
-This is foursome between the view and presenter, React.js and Backbone.js models who loves the client-side asset builder, Broccoli.js, along with the module bundler, Webpack. WOAH! The name dropping!
+This is foursome between the view and presenter, [React](http://facebook.github.io/react/docs/getting-started.html) and [Backbone](http://backbonejs.org/) models who loves the client-side asset builder, [Broccoli](https://github.com/broccolijs/broccoli), along with the module bundler, [Webpack](https://github.com/webpack/webpack). WOAH! The name dropping!
 
 ### So what is this about?
-This is a minimal scaffold setup to get these delicious technologies to work well together in an easy to setup frontend workflow and distribution. This is for you if you want to build fast client side frontend applications that uses a REST API.
+This is a minimal scaffolding setup to get these delicious technologies to work well together in an easy to setup frontend workflow and distribution. This is for you if you want to build fast client side frontend applications that uses a REST API.
 
 ### Setup development environment
 Run the following commands install dependencies for setting up development environment
@@ -24,7 +24,7 @@ Run the following command to distribute the project into the `dist` folder
 A `dist` folder will be created with minimized content.
 
 ### Test
-Run unit tests using mocha and sinon to test Backbone models and using mocha and Cheerio to test React components
+Run unit tests using [mocha](http://visionmedia.github.io/mocha) and [sinon](http://sinonjs.org/) to test Backbone models and using mocha and [Cheerio](https://github.com/cheeriojs/cheerio) to test React components
 
 	npm test
 
