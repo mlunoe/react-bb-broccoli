@@ -1,5 +1,7 @@
+/** @jsx React.DOM */
+
 var React = require("react");
-var PeopleList = require("./components/PeopleList.jsx");
+var PeopleList = require("./components/PeopleList");
 
 /* jshint trailing:false, quotmark:false, newcap:false */
 React.renderComponent(

@@ -1,8 +1,10 @@
+/** @jsx React.DOM */
+
 var React = require("react");
 var BackboneMixin = require("../mixins/BackboneMixin.js");
 
 var People = require("../models/People");
-var Hello = require("../components/Hello.jsx");
+var Hello = require("../components/Hello");
 
 var PeopleList = React.createClass({
   displayName: "People",
