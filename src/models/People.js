@@ -1,4 +1,4 @@
-var Backbone = require("Backbone");
+var Backbone = require("backbone");
 
 var Person = require("./Person");
 
