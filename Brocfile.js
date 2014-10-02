@@ -1,9 +1,11 @@
 // dependencies
 var pickFiles = require("broccoli-static-compiler");
 var mergeTrees = require("broccoli-merge-trees");
+var filterReact = require("broccoli-react");
 var webpackify = require("broccoli-webpack");
 var uglifyJavaScript = require("broccoli-uglify-js");
 var less = require("broccoli-less");
+var jshintTree = require("broccoli-jshint");
 var env = require("broccoli-env").getEnv();
 
 var srcDir = "src";
@@ -14,23 +16,31 @@ var imgDistDir = "img";
 var apiDir = "api";
 var apiDistDir = "api";
 
-// create tree for react
-var src = pickFiles(srcDir, {
+// BROCCOLI_ENV = "production"|"development"
+
+// create tree for .js and .jsx
+var appJs = pickFiles(srcDir, {
   srcDir: "/",
-  destDir: ""
+  destDir: "",
+  files: ["**/*.jsx", "**/*.js"]
 });
 
-// transform jsx and load in module dependencies
-var appJs = webpackify(src, {
-  entry: "./main.jsx",
+appJs = filterReact(appJs, {extensions: ["jsx"]});
+
+// run jshint on compiled js
+var hintTree = jshintTree(appJs);
+
+// hack to strip test files from jshint tree
+hintTree = pickFiles(hintTree, {
+  srcDir: "/",
+  files: []
+});
+
+// transform merge module dependencies into one file
+appJs = webpackify(appJs, {
+  entry: "./main.js",
   output: {
     filename: "application.js"
-  },
-  module: {
-    loaders: [
-      // use jsx-loader and auto insert the React.DOM pragma
-      { test: /\.jsx$/, loader: "jsx-loader?insertPragma=React.DOM" }
-    ]
   }
 });
 
@@ -63,17 +73,17 @@ var appApi = pickFiles(apiDir, {
   destDir: apiDistDir,
 });
 
+
 var publicFiles = new mergeTrees([index, appImg, appApi], { overwrite: true });
 
 if (env === "production") {
-
   appJs = uglifyJavaScript(appJs, {
     mangle: true,
     compress: true
   });
 }
 
-
-// TODO: asset pipeline: js version of sprockets
-
-module.exports = mergeTrees([appJs, appCss, publicFiles], { overwrite: true });
+module.exports = mergeTrees(
+  [appJs, appCss, publicFiles, hintTree],
+  { overwrite: true }
+);
