@@ -67,14 +67,14 @@ var appImg = pickFiles(imgDir, {
   destDir: imgDistDir,
 });
 
-// create tree for api files
-var appApi = pickFiles(apiDir, {
+// create tree for data files
+var appData = pickFiles(dataDir, {
   srcDir: "/",
-  destDir: apiDistDir,
+  destDir: dataDistDir,
 });
 
 
-var publicFiles = new mergeTrees([index, appImg, appApi], { overwrite: true });
+var publicFiles = new mergeTrees([index, appImg, appData], { overwrite: true });
 
 if (env === "production") {
   appJs = uglifyJavaScript(appJs, {
