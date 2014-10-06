@@ -1,5 +1,5 @@
-# React + Backbone <3 Broccoli + Webpack
-This is foursome between the view and presenter, [React](http://facebook.github.io/react/docs/getting-started.html) and [Backbone](http://backbonejs.org/) models who loves the client-side asset builder, [Broccoli](https://github.com/broccolijs/broccoli), along with the module bundler, [Webpack](https://github.com/webpack/webpack). WOAH! The name dropping!
+# React + Backbone <3 Broccoli
+This is foursome between the view and presenter, [React](http://facebook.github.io/react/docs/getting-started.html) and [Backbone](http://backbonejs.org/) models who loves the client-side asset builder, [Broccoli](https://github.com/broccolijs/broccoli). WOAH! The name dropping!
 
 ### So what is this about?
 This is a minimal scaffolding setup to get these delicious technologies to work well together in an easy to setup frontend workflow and distribution. This is for you if you want to build fast client side frontend applications that uses a REST API.
