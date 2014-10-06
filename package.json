@@ -1,7 +1,7 @@
 {
   "name": "react-bb-broccoli",
   "description": "React and Backbone with Broccoli",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "author": "Michael Lunøe <michael.lunoe@gmail.com>",
   "repository": {
     "type": "git",

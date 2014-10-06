@@ -63,3 +63,7 @@ You can also run the following command to watch for changes, though it only work
 ### Footnotes
 (1) Look into [package.json/"scripts"](https://github.com/mesosphere/mandm/blob/master/frontend/package.json#L32) to see the bash commands.
 
+TODO: create npm module
+
+	npm install component-release -g
+	component-release x.y.z
