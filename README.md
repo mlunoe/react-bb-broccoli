@@ -5,32 +5,33 @@ This is foursome between the view and presenter, [React](http://facebook.github.
 This is a minimal scaffolding setup to get these delicious technologies to work well together in an easy to setup frontend workflow and distribution. This is for you if you want to build fast client side frontend applications that uses a REST API.
 
 ### Setup development environment
-Run the following commands install dependencies for setting up development environment
+Run the following commands install dependencies for setting up the [Broccoli](https://github.com/broccolijs/broccoli) development environment [(1)](https://github.com/mesosphere/mandm/tree/master/frontend#footnotes):
 
 	npm install
 	npm install -g broccoli-cli
 
-	broccoli serve
-
+	npm run serve
 
 Open up a browser on `localhost:4200` and watch the magic!
 
 
 ### Build and release
-Run the following command to distribute the project into the `dist` folder
+Run the following command to distribute the project into the `target/app` folder [(1)](https://github.com/mesosphere/mandm/tree/master/frontend#footnotes):
 
-	broccoli build dist
+	npm run test
+	npm run clean
+	npm run build
 
-A `dist` folder will be created with minimized content.
+A `target/app` folder will be created with minimized content.
 
 ### Test
-Run unit tests using [mocha](http://visionmedia.github.io/mocha) and [sinon](http://sinonjs.org/) to test Backbone models and using mocha and [Cheerio](https://github.com/cheeriojs/cheerio) to test React components
+Run the unit tests [(1)](https://github.com/mesosphere/mandm/tree/master/frontend#footnotes):
 
 	npm test
 
-See test folder for examples.
+See [test](https://github.com/mesosphere/mandm/tree/master/frontend/test) folder for examples.
 
-You can also run the following command to watch for changes, though it only works for .js files
+You can also run the following command to watch for changes, though it only works for .js files [(1)](https://github.com/mesosphere/mandm/tree/master/frontend#footnotes):
 
 	npm run test-watch
 
@@ -58,3 +59,7 @@ You can also run the following command to watch for changes, though it only work
 	4. SublimeLinter-jsxhint needs a global jsxhint in your system, as well as JavaScript (JSX) bundle inside Packages/JavaScript, see [instructions](https://github.com/SublimeLinter/SublimeLinter-jsxhint#linter-installation)
 
 	5. ~~SublimeLinter-csslint needs a global csslint in your system, see [instructions](https://github.com/SublimeLinter/SublimeLinter-csslint#linter-installation)~~
+
+### Footnotes
+(1) Look into [package.json/"scripts"](https://github.com/mesosphere/mandm/blob/master/frontend/package.json#L32) to see the bash commands.
+
