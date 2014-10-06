@@ -9,8 +9,6 @@ module.exports = Backbone.Collection.extend({
     return data.users;
   },
 
-  url: function () {
-    return "/api/data.json";
-  }
+  url: "data/data.json"
 
 });
