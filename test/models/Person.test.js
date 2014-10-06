@@ -1,10 +1,10 @@
-var assert = global.assert;
+var assert = require("assert");
 
 var Person = require("../../src/models/Person");
 
 module.exports = {
 
-  before: function () {
+  beforeEach: function () {
     this.person = new Person({ id: 0, name: "Broccoli" });
   },
 

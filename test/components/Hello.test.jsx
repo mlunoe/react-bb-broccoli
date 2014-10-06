@@ -1,16 +1,15 @@
 /** @jsx React.DOM */
 
-var React = global.react;
-var $ = global.$;
-var assert = global.assert;
+var assert = require("assert");
+var cheerio = require("cheerio");
+var React = require("react");
 
 var Person = require("../../src/models/Person");
 var Hello = require("../../src/components/Hello");
 
-module.exports = {
-  beforeEach: function () {
+var $ = cheerio.load("<html><body></body></html>");
 
-  },
+module.exports = {
   afterEach: function () {
     $("body").empty();
   },
