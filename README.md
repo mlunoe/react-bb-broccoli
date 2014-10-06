@@ -5,7 +5,7 @@ This is foursome between the view and presenter, [React](http://facebook.github.
 This is a minimal scaffolding setup to get these delicious technologies to work well together in an easy to setup frontend workflow and distribution. This is for you if you want to build fast client side frontend applications that uses a REST API.
 
 ### Setup development environment
-Run the following commands install dependencies for setting up the [Broccoli](https://github.com/broccolijs/broccoli) development environment [(1)](https://github.com/mlunoe/react-bb-broccoli/tree/master/frontend#footnotes):
+Run the following commands install dependencies for setting up the [Broccoli](https://github.com/broccolijs/broccoli) development environment [(1)](https://github.com/mlunoe/react-bb-broccoli#footnotes):
 
 	npm install
 	npm install -g broccoli-cli
@@ -16,7 +16,7 @@ Open up a browser on `localhost:4200` and watch the magic!
 
 
 ### Build and release
-Run the following command to distribute the project into the `target/app` folder [(1)](https://github.com/mlunoe/react-bb-broccoli/tree/master/frontend#footnotes):
+Run the following command to distribute the project into the `target/app` folder [(1)](https://github.com/mlunoe/react-bb-broccoli#footnotes):
 
 	npm run test
 	npm run clean
@@ -25,13 +25,13 @@ Run the following command to distribute the project into the `target/app` folder
 A `target/app` folder will be created with minimized content.
 
 ### Test
-Run the unit tests [(1)](https://github.com/mlunoe/react-bb-broccoli/tree/master/frontend#footnotes):
+Run the unit tests [(1)](https://github.com/mlunoe/react-bb-broccoli#footnotes):
 
 	npm test
 
-See [test](https://github.com/mlunoe/react-bb-broccoli/tree/master/frontend/test) folder for examples.
+See [test](https://github.com/mlunoe/react-bb-broccoli/test) folder for examples.
 
-You can also run the following command to watch for changes, though it only works for .js files [(1)](https://github.com/mlunoe/react-bb-broccoli/tree/master/frontend#footnotes):
+You can also run the following command to watch for changes, though it only works for .js files [(1)](https://github.com/mlunoe/react-bb-broccoli#footnotes):
 
 	npm run test-watch
 
@@ -61,4 +61,4 @@ You can also run the following command to watch for changes, though it only work
 	5. ~~SublimeLinter-csslint needs a global csslint in your system, see [instructions](https://github.com/SublimeLinter/SublimeLinter-csslint#linter-installation)~~
 
 ### Footnotes
-(1) Look into [package.json/"scripts"](https://github.com/mlunoe/react-bb-broccoli/blob/master/frontend/package.json#L32) to see the bash commands.
+(1) Look into [package.json/"scripts"](https://github.com/mesosphere/mandm/blob/master/frontend/package.json#L32) to see the bash commands.
