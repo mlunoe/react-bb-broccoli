@@ -2,7 +2,7 @@
   "name": "mesosphere-manager-frontend",
   "description": "Frontend for the Mesosphere Manager",
   "author": "Michael Lunøe <mlunoe@mesosphere.io>",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/mesosphere/mandm/tree/master/frontend"
