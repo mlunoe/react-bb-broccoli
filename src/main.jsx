@@ -1,17 +1,18 @@
 /** @jsx React.DOM */
 
+var Backbone = require("backbone");
 var React = require("react");
 
-var PeopleList = require("./components/PeopleList");
+var ViewManager = require("./components/ViewManager");
+
+var Router = require("./models/Router");
+
+var globalRouter = new Router();
 
 /* jshint trailing:false, quotmark:false, newcap:false */
 React.renderComponent(
-  <div>
-    <h1>
-      Build with <img src="img/favicon.ico" />
-      Broccoli<img src="img/favicon.ico" />
-    </h1>
-    <PeopleList />
-  </div>,
-  document.getElementById("application")
+  <ViewManager router={globalRouter} />,
+  document.body
 );
+
+Backbone.history.start();

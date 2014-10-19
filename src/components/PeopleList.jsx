@@ -9,25 +9,33 @@ var People = require("../models/People");
 var PeopleList = React.createClass({
   displayName: "People",
 
+  propTypes: {
+    collection: React.PropTypes.instanceOf(People).isRequired,
+    route: React.PropTypes.string.isRequired,
+    name: React.PropTypes.string
+  },
+
   mixins: [BackboneMixin],
 
-  getInitialState: function() {
+  getDefaultProps: function() {
     return {
-      people: new People()
+      name: "List of People"
     };
   },
 
   render: function() {
-    var peopleList = this.state.people.models.map(function (person, index) {
+    console.log("Rendered: " + this.props.route);
+    var peopleList = this.props.collection.map(function (person) {
 
       /* jshint trailing:false, quotmark:false, newcap:false */
       return (
-        <Hello key={index} person={person} />
+        <Hello key={person.id} person={person} />
       );
     });
 
     return (
       <div>
+        <h1>{this.props.name}</h1>
         {peopleList}
       </div>
     );
