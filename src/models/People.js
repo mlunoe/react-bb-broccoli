@@ -1,6 +1,7 @@
 var Backbone = require("backbone");
 
 var Person = require("./Person");
+var Config = require("../utils/Config");
 
 module.exports = Backbone.Collection.extend({
   model: Person,
@@ -9,6 +10,6 @@ module.exports = Backbone.Collection.extend({
     return data.users;
   },
 
-  url: "data/data.json"
+  url: Config.baseUrl + "data.json"
 
 });
