@@ -17,15 +17,6 @@ var PeopleList = React.createClass({
     };
   },
 
-  componentWillMount: function() {
-    // get data
-    this.state.people.fetch();
-  },
-
-  getBackboneModels: function() {
-    return [this.state.people];
-  },
-
   render: function() {
     var peopleList = this.state.people.models.map(function (person, index) {
 
