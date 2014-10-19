@@ -4,11 +4,11 @@ var Person = require("../../src/models/Person");
 
 module.exports = {
 
-  beforeEach: function () {
-    this.person = new Person({ id: 0, name: "Broccoli" });
-  },
-
   "Person": {
+
+    beforeEach: function () {
+      this.person = new Person({ id: 0, name: "Broccoli" });
+    },
 
     "should have a name": function () {
       assert.equal("Broccoli", this.person.get("name"));

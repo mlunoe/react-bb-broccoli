@@ -10,10 +10,13 @@ var Hello = require("../../src/components/Hello");
 var $ = cheerio.load("<html><body></body></html>");
 
 module.exports = {
-  afterEach: function () {
-    $("body").empty();
-  },
+
   "Hello": {
+
+    afterEach: function () {
+      $("body").empty();
+    },
+
     "should render the component populated with data": function () {
       var react = new Person({ id: 0, name: "React" });
       var webpack = new Person({ id: 1, name: "Webpack" });

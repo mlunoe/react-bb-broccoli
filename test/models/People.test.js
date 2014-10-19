@@ -20,18 +20,19 @@ var data = {
 
 module.exports = {
 
-  beforeEach: function () {
-    this.sinon = sinon.sandbox.create();
-    this.ajaxStub = sinon.stub(Backbone, "ajax").yieldsTo("success", data);
-    this.people = new People();
-  },
-
-  afterEach: function () {
-    this.ajaxStub.restore();
-    this.sinon.restore();
-  },
-
   "People": {
+
+    beforeEach: function () {
+      this.sinon = sinon.sandbox.create();
+      this.ajaxStub = this.sinon.stub(Backbone, "ajax").
+        yieldsTo("success", data);
+      this.people = new People();
+    },
+
+    afterEach: function () {
+      this.ajaxStub.restore();
+      this.sinon.restore();
+    },
 
     "should be populated with data": function () {
       this.people.fetch();
