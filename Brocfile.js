@@ -1,128 +1,218 @@
 // dependencies
 var assetRev = require("broccoli-asset-rev");
-var concatCss = require("broccoli-concat");
+var chalk = require("chalk");
 var cleanCSS = require("broccoli-clean-css");
+var concatCSS = require("broccoli-concat");
 var env = require("broccoli-env").getEnv();
 var filterReact = require("broccoli-react");
-var jshintTree = require("broccoli-jshint");
+var jsHintTree = require("broccoli-jshint");
 var less = require("broccoli-less");
 var mergeTrees = require("broccoli-merge-trees");
 var pickFiles = require("broccoli-static-compiler");
+var replace = require("broccoli-replace");
 var uglifyJavaScript = require("broccoli-uglify-js");
 var webpackify = require("broccoli-webpack");
+var _ = require("underscore");
 
-var srcDir = "src";
-var mainJsFile = "main"; // without extension
-var stylesDir = "styles";
-var stylesDistDir = "css";
-var mainStylesFile = "main"; // without extension
-var imgDir = "img";
-var imgDistDir = "img";
-var dataDir = "data";
-var dataDistDir = "data";
+var dirs = {
+  data: "data",
+  dataDist: "data",
+  src: "src",
+  styles: "styles",
+  stylesDist: "css",
+  img: "img",
+  imgDist: "img"
+};
 
-// export BROCCOLI_ENV="production"|"development"
+var fileNames = {
+  mainJs: "main", // without extension
+  mainStyles: "main" // without extension
+};
 
-// create tree for .js and .jsx
-var appJs = pickFiles(srcDir, {
-  srcDir: "/",
-  destDir: "",
-  files: ["**/*.jsx", "**/*.js"]
-});
+var tasks = {
 
-appJs = filterReact(appJs, {extensions: ["jsx"]});
+  jsHint: function (jsTree) {
+    // run jshint on compiled js
+    var hintTree = jsHintTree(jsTree , {
+      logError: function (message) {
+        switch (env) {
+          case "production":
+            this._errors.push(message + "\n");
+            // fail build in production
+            throw new Error("jshint failed, see messages above");
+          default:
+            // use pretty colors in test and development mode
+            this._errors.push(chalk.red(message) + "\n");
+            break;
+        }
+      }
+    });
 
-var hintTree;
+    // hack to strip test files from jshint tree
+    hintTree = pickFiles(hintTree, {
+      srcDir: "/",
+      files: []
+    });
 
-// run jshint on compiled js
-if (env === "production") {
-  hintTree = jshintTree(appJs , {
-    logError: function (message) {
-      this._errors.push(message + "\n");
-      // only fail build in production
-      throw new Error("jshint failed, see messages above");
-    }
-  });
-} else {
-  hintTree = jshintTree(appJs);
-}
+    return mergeTrees(
+      [hintTree, jsTree],
+      { overwrite: true }
+    );
+  },
 
-// hack to strip test files from jshint tree
-hintTree = pickFiles(hintTree, {
-  srcDir: "/",
-  files: []
-});
+  webpack: function (masterTree) {
+    // transform merge module dependencies into one file
+    masterTree = webpackify(masterTree, {
+      entry: "./" + fileNames.mainJs + ".js",
+      output: {
+        filename: "application.js"
+      }
+    });
 
-// transform merge module dependencies into one file
-appJs = webpackify(appJs, {
-  entry: "./" + mainJsFile + ".js",
-  output: {
-    filename: "application.js"
+    return mergeTrees(
+      [masterTree, masterTree],
+      { overwrite: true }
+    );
+  },
+
+  minifyJs: function (masterTree) {
+    return uglifyJavaScript(masterTree, {
+      mangle: true,
+      compress: true
+    });
+  },
+
+  css: function (masterTree) {
+    // create tree for less
+    var cssTree = pickFiles(dirs.styles, {
+      srcDir: "/",
+      files: ["**/*.less", "**/*.css"],
+      destDir: dirs.stylesDist
+    });
+
+    // compile less to css
+    cssTree = less(cssTree, {});
+
+    // concatenate css
+    cssTree = concatCSS(cssTree, {
+      inputFiles: [
+        "**/*.css",
+        "!" + dirs.stylesDist + "/" + fileNames.mainStyles + ".css",
+        dirs.stylesDist + "/" + fileNames.mainStyles + ".css"
+      ],
+      outputFile: "/" + dirs.stylesDist + "/application.css",
+    });
+
+    return mergeTrees(
+      [masterTree, cssTree],
+      { overwrite: true }
+    );
+  },
+
+  minifyCSS: function(masterTree) {
+    return cleanCSS(masterTree);
+  },
+
+  index: function (masterTree) {
+    // create tree for index
+    var indexTree = pickFiles(dirs.src, {
+      srcDir: "/",
+      destDir: "",
+      files: ["*.html"],
+    });
+
+    return mergeTrees(
+      [masterTree, indexTree],
+      { overwrite: true }
+    );
+  },
+
+  img: function (masterTree) {
+    // create tree for image files
+    var imgTree = pickFiles(dirs.img, {
+      srcDir: "/",
+      destDir: dirs.imgDist,
+    });
+
+    return mergeTrees(
+      [masterTree, imgTree],
+      { overwrite: true }
+    );
+  },
+
+  data: function (masterTree) {
+    // create tree for data files
+    var dataTree = pickFiles(dirs.data, {
+      srcDir: "/",
+      destDir: dirs.dataDist,
+    });
+
+    return mergeTrees(
+      [masterTree, dataTree],
+      { overwrite: true }
+    );
+  },
+
+  md5: function (masterTree) {
+    // add md5 checksums to filenames
+    return assetRev(masterTree, {
+      extensions: ["js", "css", "png", "jpg", "gif", "ico"],
+      replaceExtensions: ["html", "js", "css"]
+    });
   }
-});
+};
 
-// create tree for less
-var appLess = pickFiles(stylesDir, {
-  srcDir: "/",
-  files: ["**/*.less", "**/*.css"],
-  destDir: stylesDistDir
-});
-
-// compile less to css
-var appCss = less(appLess, {});
-
-// concatenate css
-appCss = concatCss(appCss, {
-  inputFiles: [
-    "**/*.css",
-    "!" + stylesDistDir + "/" + mainStylesFile + ".css",
-    stylesDistDir + "/main.css"
-  ],
-  outputFile: "/" + stylesDistDir + "/application.css",
-});
-
-// create tree for index
-var index = pickFiles(srcDir, {
-  srcDir: "/",
-  destDir: "",
-  files: ["*.html"],
-});
-
-// create tree for image files
-var appImg = pickFiles(imgDir, {
-  srcDir: "/",
-  destDir: imgDistDir,
-});
-
-// create tree for data files
-var appData = pickFiles(dataDir, {
-  srcDir: "/",
-  destDir: dataDistDir,
-});
-
-
-var publicFiles = new mergeTrees([index, appImg, appData], { overwrite: true });
-
-var assetTree = mergeTrees(
-  [appJs, appCss, publicFiles, hintTree],
-  { overwrite: true }
-);
-
-if (env === "production") {
-  // minify js
-  assetTree = uglifyJavaScript(assetTree, {
-    mangle: true,
-    compress: true
+function createJsTree() {
+  // create tree for .js and .jsx
+  var jsTree = pickFiles(dirs.src, {
+    srcDir: "/",
+    destDir: "",
+    files: [
+      "**/*.jsx",
+      "**/*.js"
+    ]
   });
 
-  // minify css
-  assetTree = cleanCSS(assetTree);
+  // compile react files
+  jsTree = filterReact(jsTree, {extensions: ["jsx"]});
 
-  // add md5 checksums to filenames
-  assetTree = assetRev(assetTree, {
-    extensions: ["js", "css", "png", "jpg", "gif", "ico"],
-    replaceExtensions: ["html", "js", "css"]
+  // replace @@ENV in js code with current BROCCOLI_ENV environment variable
+  // {default:"development"|"production"|"test"}
+  return replace(jsTree, {
+    files: ["**/*.js"],
+    patterns: [
+      {
+        match: "ENV", // replaces @@ENV
+        replacement: env
+      }
+    ]
   });
 }
 
-module.exports = assetTree;
+var buildTree = _.compose(tasks.jsHint, createJsTree);
+
+// export BROCCOLI_ENV={default:"development"|"production"|"test"}
+if (env === "development" || env === "production" ) {
+  // add steps used in both development and production
+  buildTree = _.compose(
+    tasks.img,
+    tasks.index,
+    tasks.data,
+    tasks.css,
+    tasks.webpack,
+    buildTree
+  );
+}
+
+if (env === "production") {
+  // add steps that are exclusively used in production
+  buildTree = _.compose(
+    tasks.md5,
+    tasks.minifyCSS,
+    tasks.minifyJs,
+    buildTree
+  );
+}
+
+
+module.exports = buildTree();

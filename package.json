@@ -1,11 +1,11 @@
 {
-  "name": "react-bb-broccoli",
-  "description": "React and Backbone with Broccoli",
-  "version": "0.0.6",
-  "author": "Michael Lunøe <michael.lunoe@gmail.com>",
+  "name": "mesosphere-manager-frontend",
+  "description": "Frontend for the Mesosphere Manager",
+  "author": "Michael Lunøe <mlunoe@mesosphere.io>",
+  "version": "0.0.1",
   "repository": {
     "type": "git",
-    "url": "https://github.com/mlunoe/react-bb-broccoli"
+    "url": "https://github.com/mesosphere/mandm/tree/master/frontend"
   },
   "dependencies": {
     "backbone": "^1.1.2",
@@ -23,9 +23,11 @@
     "broccoli-less": "^1.0.0",
     "broccoli-merge-trees": "^0.1.4",
     "broccoli-react": "^0.5.0",
+    "broccoli-replace": "^0.2.0",
     "broccoli-static-compiler": "^0.1.4",
     "broccoli-uglify-js": "^0.1.3",
     "broccoli-webpack": "^0.1.1",
+    "chalk": "^0.5.1",
     "cheerio": "^0.17.0",
     "mocha": "^1.21.4",
     "mocha-teamcity-reporter": "0.0.4",
