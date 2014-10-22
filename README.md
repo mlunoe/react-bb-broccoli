@@ -16,7 +16,7 @@ The project is build with a modular structure, so only React depends on the Bacb
 Run the following commands install dependencies for setting up the [Broccoli](https://github.com/broccolijs/broccoli) development environment [(1)](https://github.com/mlunoe/react-bb-broccoli#footnotes):
 
 	npm install
-	npm install -g broccoli-cli
+	npm install -g broccoli-cli # may need sudo
 
 	npm run serve
 
