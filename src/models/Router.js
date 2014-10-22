@@ -8,11 +8,13 @@ var Router = Backbone.Router.extend({
     "": "home",
     "page1": "page1",
     "page2": "page2",
-    "page2/:name": "page2"
+    "page2/:name": "page2",
+    "signin": "signin"
   },
   home: noop,
   page1: noop,
-  page2: noop
+  page2: noop,
+  signin: noop
 });
 
 module.exports = Router;

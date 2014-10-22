@@ -3,7 +3,9 @@
 var React = require("react/addons");
 
 var PeopleList = require("../components/PeopleList");
+var SignIn = require("../components/SignIn");
 var People = require("../models/People");
+var User = require("../models/User");
 var Router = require("../models/Router");
 
 var ViewManager = React.createClass({
@@ -17,7 +19,8 @@ var ViewManager = React.createClass({
   getInitialState: function () {
     return {
       people: new People(),
-      route: null
+      route: null,
+      user: new User()
     };
   },
 
@@ -66,6 +69,13 @@ var ViewManager = React.createClass({
     );
   },
 
+  routeSignin: function () {
+    /* jshint trailing:false, quotmark:false, newcap:false */
+    return (
+      <SignIn model={this.state.user} />
+    );
+  },
+
   componentDidMount: function () {
     this.props.router.on("route", function (route, params) {
       this.setState({
@@ -96,6 +106,7 @@ var ViewManager = React.createClass({
           Broccoli
           <img src="img/favicon.ico" />
         </h1>
+        <a href="/#signin" className="pull-right">Sign in</a>
         {component}
       </div>
     );
