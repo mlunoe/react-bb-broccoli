@@ -72,7 +72,9 @@ var ViewManager = React.createClass({
   routeSignin: function () {
     /* jshint trailing:false, quotmark:false, newcap:false */
     return (
-      <SignIn model={this.state.user} />
+      <SignIn
+          model={this.state.user}
+          route={this.state.route.name} />
     );
   },
 
