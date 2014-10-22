@@ -4,6 +4,14 @@ This is threesome between the view and presenter, [React](http://facebook.github
 ### So what is this about?
 This is a minimal skeleton, scaffolding setup and developer environment to get these delicious technologies to work well together, in an easy to setup frontend workflow and distribution. This is for you if you want to build fast client side frontend applications that uses a REST API.
 
+### Modular structure
+The project is build with a modular structure, so only React depends on the Bacbone models:
+
+* Broccoli.js file and its build dependency node modules can be replaced with, say Grunt or Gulp.
+* If you don't need the tests, or have your own setup the "test" folder can be trashed with its dependent node modules.
+* The React files can also be removed and be replaced with something else.
+* The Backbone models are embedded into to React files, so if these are not needed both React and Backbone should be removed - though this sort of removes the purpose of this library.
+
 ### Setup development environment
 Run the following commands install dependencies for setting up the [Broccoli](https://github.com/broccolijs/broccoli) development environment [(1)](https://github.com/mlunoe/react-bb-broccoli#footnotes):
 
