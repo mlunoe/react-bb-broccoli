@@ -11,7 +11,8 @@ var SignIn = React.createClass({
 
   propTypes: {
     className: React.PropTypes.string,
-    model: React.PropTypes.instanceOf(User).isRequired
+    model: React.PropTypes.instanceOf(User).isRequired,
+    route: React.PropTypes.string.isRequired
   },
 
   mixins: [BackboneMixin],
@@ -37,6 +38,8 @@ var SignIn = React.createClass({
   },
 
   render: function() {
+    console.log("Rendered: " + this.props.route);
+
     var model = this.props.model;
 
     /* jshint trailing:false, quotmark:false, newcap:false */
