@@ -91,11 +91,21 @@ var ViewManager = React.createClass({
 
   render: function() {
     var route = this.state.route;
+    var email = this.state.user.get("email");
     var component;
 
     if (route != null) {
       var routeName = this.capitalize(route.name);
       component = this["route" + routeName].apply(this, route.params);
+    }
+
+    var currentUser;
+    if (email != null) {
+      currentUser = "Logged in as: " + email;
+    } else {
+      currentUser = (
+        <a href="/#signin">Sign in</a>
+      );
     }
 
 
@@ -108,7 +118,11 @@ var ViewManager = React.createClass({
           Broccoli
           <img src="img/favicon.ico" />
         </h1>
-        <a href="/#signin" className="pull-right">Sign in</a>
+        <ul className="list-inline pull-right">
+          <li>
+            {currentUser}
+          </li>
+        </ul>
         {component}
       </div>
     );
