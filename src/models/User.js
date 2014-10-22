@@ -33,7 +33,7 @@ var User = Backbone.Model.extend({
   login: function (callback) {
     var data = this.getSignInData();
     Service.request(
-      Config.baseUrl + "api/auth/login",
+      Config.baseUrl + "auth/login.json",
       "POST",
       data,
       callback
@@ -43,7 +43,7 @@ var User = Backbone.Model.extend({
   logout: function (callback) {
     if (this.isLoggedIn()) {
       Service.request(
-        Config.baseUrl + "api/auth/logout",
+        Config.baseUrl + "auth/logout.json",
         "GET",
         null,
         callback
@@ -55,7 +55,7 @@ var User = Backbone.Model.extend({
     return this.get("email") != null;
   },
 
-  url: Config.baseUrl + "api/auth/user"
+  url: Config.baseUrl + "auth/user.json"
 
 });
 
