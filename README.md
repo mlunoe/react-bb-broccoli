@@ -61,4 +61,4 @@ You can also run the following command to watch for changes, though it only work
 	5. ~~SublimeLinter-csslint needs a global csslint in your system, see [instructions](https://github.com/SublimeLinter/SublimeLinter-csslint#linter-installation)~~
 
 ### Footnotes
-(1) Look into [package.json/"scripts"](https://github.com/mlunoe/react-bb-broccoli/blob/master/package.json#L35) to see the bash commands.
+(1) Look into [package.json/"scripts"](https://github.com/mlunoe/react-bb-broccoli/blob/master/package.json#L37) to see the bash commands.
