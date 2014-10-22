@@ -29,7 +29,7 @@ Run the unit tests [(1)](https://github.com/mlunoe/react-bb-broccoli#footnotes):
 
 	npm test
 
-See [test](https://github.com/mlunoe/react-bb-broccoli/test) folder for examples.
+See [test](https://github.com/mlunoe/react-bb-broccoli/tree/master/test) folder for examples.
 
 You can also run the following command to watch for changes, though it only works for .js files [(1)](https://github.com/mlunoe/react-bb-broccoli#footnotes):
 
