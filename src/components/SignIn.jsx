@@ -15,6 +15,10 @@ var SignIn = React.createClass({
     route: React.PropTypes.string.isRequired
   },
 
+  getBackboneModels: function () {
+    return [this.props.model];
+  },
+
   mixins: [BackboneMixin],
 
   handleEmailChange: function (event) {

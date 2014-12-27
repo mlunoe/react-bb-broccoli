@@ -15,6 +15,10 @@ var PeopleList = React.createClass({
     name: React.PropTypes.string
   },
 
+  getBackboneModels: function () {
+    return [this.props.collection];
+  },
+
   mixins: [BackboneMixin],
 
   getDefaultProps: function() {
