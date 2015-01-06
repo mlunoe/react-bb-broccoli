@@ -1,5 +1,5 @@
 # React + Backbone <3 Broccoli
-This is threesome between the view and presenter, [React](http://facebook.github.io/react/docs/getting-started.html) and [Backbone](http://backbonejs.org/) models who loves the client-side asset builder, [Broccoli](https://github.com/broccolijs/broccoli).
+This is threesome between the view and presenter, [React](http://facebook.github.io/react/docs/getting-started.html) components and [Backbone](http://backbonejs.org/) models who loves the client-side asset builder, [Broccoli](https://github.com/broccolijs/broccoli).
 
 ### So what is this about?
 This is a minimal skeleton for developer and distribution environments to get these delicious technologies to work well together. This is for you if you want to build fast client side frontend applications that uses a REST API.
