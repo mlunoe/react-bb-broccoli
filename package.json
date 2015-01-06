@@ -35,8 +35,8 @@
     "sinon": "^1.10.3"
   },
   "scripts": {
-    "clean": "rm -rf target/app tmp",
-    "build": "broccoli build target/app",
+    "clean": "rm -rf target tmp",
+    "build": "broccoli build target",
     "serve": "broccoli serve",
     "test": "./node_modules/mocha/bin/mocha --ui exports --reporter spec --compilers jsx:test/compiler.js test/object-assign-polyfill.js test/**/*.test.*",
     "test-team-city": "./node_modules/mocha/bin/mocha --ui exports --reporter mocha-teamcity-reporter --compilers jsx:test/compiler.js test/object-assign-polyfill.js test/**/*.test.*",
