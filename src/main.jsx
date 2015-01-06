@@ -10,7 +10,7 @@ var Router = require("./models/Router");
 var globalRouter = new Router();
 
 /* jshint trailing:false, quotmark:false, newcap:false */
-React.renderComponent(
+React.render(
   <ViewManager router={globalRouter} />,
   document.body
 );

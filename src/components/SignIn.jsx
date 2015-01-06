@@ -48,7 +48,9 @@ var SignIn = React.createClass({
 
     /* jshint trailing:false, quotmark:false, newcap:false */
     return (
-      <form className={this.props.className} role="form">
+      <form
+          className={this.props.className}
+          role="form">
         <div className="form-group">
           <label>Email address</label>
           <input
