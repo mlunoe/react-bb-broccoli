@@ -4,6 +4,7 @@ var chalk = require("chalk");
 var cleanCSS = require("broccoli-clean-css");
 var concatCSS = require("broccoli-concat");
 var env = require("broccoli-env").getEnv();
+var exportTree = require("broccoli-export-tree");
 var filterReact = require("broccoli-react");
 var jsHintTree = require("broccoli-jshint");
 var less = require("broccoli-less");
@@ -155,7 +156,15 @@ var tasks = {
       extensions: ["js", "css", "png", "jpg", "gif"],
       replaceExtensions: ["html", "js", "css"]
     });
+  },
+
+  export: function (masterTree) {
+    return exportTree(masterTree, {
+      destDir: dirs.distDir,
+      clobber: true
+    });
   }
+
 };
 
 function createJsTree() {
@@ -209,5 +218,14 @@ if (env === "production") {
     buildTree
   );
 }
+
+// add the following lines to export to target folder,
+// say to be served by another system.
+// This will make `broccoli serve` and `npm run serve` act as
+// `broccoli build target --watch`
+// buildTree = _.compose(
+//   tasks.export,
+//   buildTree
+// );
 
 module.exports = buildTree();
