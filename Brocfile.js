@@ -21,7 +21,7 @@ var dirs = {
   dataDist: "app/data",
   src: "src",
   styles: "styles",
-  stylesDist: "app/css",
+  stylesDist: "app",
   img: "img",
   imgDist: "app/img"
 };
@@ -83,7 +83,7 @@ var tasks = {
     // create tree for less
     var cssTree = pickFiles(dirs.styles, {
       srcDir: "/",
-      files: ["**/main.less", "**/*.css"],
+      files: ["**/" + fileNames.mainStyles + ".less", "**/*.css"],
       destDir: dirs.stylesDist
     });
 
@@ -179,10 +179,10 @@ function createJsTree() {
   });
 
   // compile react files
-  jsTree = filterReact(jsTree, {extensions: ["jsx"]});
+  jsTree = filterReact(jsTree, { extensions: ["jsx"] });
 
   // replace @@ENV in js code with current BROCCOLI_ENV environment variable
-  // {default:"development"|"production"|"test"}
+  // { default: "development" | "production" }
   return replace(jsTree, {
     files: ["**/*.js"],
     patterns: [
