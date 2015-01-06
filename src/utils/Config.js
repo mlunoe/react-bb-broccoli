@@ -1,5 +1,5 @@
 var Config = {
-  baseUrl: "/data/",
+  baseUrl: "/app/data/",
   env: "development"
 };
 

@@ -4,6 +4,7 @@ var chalk = require("chalk");
 var cleanCSS = require("broccoli-clean-css");
 var concatCSS = require("broccoli-concat");
 var env = require("broccoli-env").getEnv();
+var exportTree = require("broccoli-export-tree");
 var filterReact = require("broccoli-react");
 var jsHintTree = require("broccoli-jshint");
 var less = require("broccoli-less");
@@ -15,13 +16,14 @@ var webpackify = require("broccoli-webpack");
 var _ = require("underscore");
 
 var dirs = {
+  distDir: "target",
   data: "data",
-  dataDist: "data",
+  dataDist: "app/data",
   src: "src",
   styles: "styles",
-  stylesDist: "css",
+  stylesDist: "app/css",
   img: "img",
-  imgDist: "img"
+  imgDist: "app/img"
 };
 
 var fileNames = {
@@ -62,17 +64,12 @@ var tasks = {
 
   webpack: function (masterTree) {
     // transform merge module dependencies into one file
-    masterTree = webpackify(masterTree, {
+    return webpackify(masterTree, {
       entry: "./" + fileNames.mainJs + ".js",
       output: {
-        filename: "application.js"
+        filename: "app/application.js"
       }
     });
-
-    return mergeTrees(
-      [masterTree, masterTree],
-      { overwrite: true }
-    );
   },
 
   minifyJs: function (masterTree) {
@@ -86,7 +83,7 @@ var tasks = {
     // create tree for less
     var cssTree = pickFiles(dirs.styles, {
       srcDir: "/",
-      files: ["**/*.less", "**/*.css"],
+      files: ["**/main.less", "**/*.css"],
       destDir: dirs.stylesDist
     });
 
@@ -109,7 +106,7 @@ var tasks = {
     );
   },
 
-  minifyCSS: function(masterTree) {
+  minifyCSS: function (masterTree) {
     return cleanCSS(masterTree);
   },
 
@@ -156,10 +153,18 @@ var tasks = {
   md5: function (masterTree) {
     // add md5 checksums to filenames
     return assetRev(masterTree, {
-      extensions: ["js", "css", "png", "jpg", "gif", "ico"],
+      extensions: ["js", "css", "png", "jpg", "gif"],
       replaceExtensions: ["html", "js", "css"]
     });
+  },
+
+  export: function (masterTree) {
+    return exportTree(masterTree, {
+      destDir: dirs.distDir,
+      clobber: true
+    });
   }
+
 };
 
 function createJsTree() {
@@ -191,7 +196,7 @@ function createJsTree() {
 
 var buildTree = _.compose(tasks.jsHint, createJsTree);
 
-// export BROCCOLI_ENV={default:"development"|"production"|"test"}
+// export BROCCOLI_ENV={default:"development"|"production"}
 if (env === "development" || env === "production" ) {
   // add steps used in both development and production
   buildTree = _.compose(
@@ -213,5 +218,14 @@ if (env === "production") {
     buildTree
   );
 }
+
+// add the following lines to export to target folder,
+// say to be served by another system.
+// This will make `broccoli serve` and `npm run serve` act as
+// `broccoli build target --watch`
+// buildTree = _.compose(
+//   tasks.export,
+//   buildTree
+// );
 
 module.exports = buildTree();

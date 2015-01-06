@@ -21,7 +21,9 @@ var Hello = React.createClass({
 
     /* jshint trailing:false, quotmark:false, newcap:false */
     return (
-      <div className="clickable" onClick={this.handleClick}>
+      <div
+          className="clickable"
+          onClick={this.handleClick}>
         Hello, {this.props.person.get("name")}!
       </div>
     );

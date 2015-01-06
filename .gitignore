@@ -6,7 +6,7 @@ logs
 tmp
 
 # Compiled binary addons (http://nodejs.org/api/addons.html)
-dist
+target
 
 # Dependency directory
 # Commenting this out is preferred by some people, see

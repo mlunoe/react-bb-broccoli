@@ -114,9 +114,9 @@ var ViewManager = React.createClass({
       <div className="container">
         <h1>
           Build with&nbsp;
-          <img src="img/favicon.ico" />
+          <img src="app/img/favicon.ico" />
           Broccoli
-          <img src="img/favicon.ico" />
+          <img src="app/img/favicon.ico" />
         </h1>
         <ul className="list-inline pull-right">
           <li>
