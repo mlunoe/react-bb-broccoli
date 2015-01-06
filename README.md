@@ -73,7 +73,3 @@ You can also run the following command to watch for changes, though it only work
 ### Footnotes
 (1) Look into [package.json/"scripts"](https://github.com/mlunoe/react-bb-broccoli/blob/master/package.json#L37) to see the bash commands.
 
-TODO: create npm module
-
-	npm install component-release -g
-	component-release x.y.z
