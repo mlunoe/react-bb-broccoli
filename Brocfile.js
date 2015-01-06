@@ -31,6 +31,9 @@ var fileNames = {
   mainStyles: "main" // without extension
 };
 
+/*
+ * Task definitions
+ */
 var tasks = {
 
   jsHint: function (jsTree) {
@@ -167,6 +170,9 @@ var tasks = {
 
 };
 
+/*
+ * basic pre-processing before actual build
+ */
 function createJsTree() {
   // create tree for .js and .jsx
   var jsTree = pickFiles(dirs.src, {
@@ -194,6 +200,9 @@ function createJsTree() {
   });
 }
 
+/*
+ * Start the build
+ */
 var buildTree = _.compose(tasks.jsHint, createJsTree);
 
 // export BROCCOLI_ENV={default:"development"|"production"}
