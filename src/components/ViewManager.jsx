@@ -29,6 +29,7 @@ var ViewManager = React.createClass({
   },
 
   routeHome: function () {
+    /* jscs:disable disallowTrailingWhitespace, validateQuoteMarks */
     /* jshint trailing:false, quotmark:false, newcap:false */
     return (
       <div>
@@ -40,6 +41,7 @@ var ViewManager = React.createClass({
   },
 
   routePage1: function () {
+    /* jscs:disable disallowTrailingWhitespace, validateQuoteMarks */
     /* jshint trailing:false, quotmark:false, newcap:false */
     return (
       <div>
@@ -55,6 +57,7 @@ var ViewManager = React.createClass({
 
   routePage2: function (name) {
     name = name || "List of People #2";
+    /* jscs:disable disallowTrailingWhitespace, validateQuoteMarks */
     /* jshint trailing:false, quotmark:false, newcap:false */
     return (
       <div>
@@ -70,6 +73,7 @@ var ViewManager = React.createClass({
   },
 
   routeSignin: function () {
+    /* jscs:disable disallowTrailingWhitespace, validateQuoteMarks */
     /* jshint trailing:false, quotmark:false, newcap:false */
     return (
       <SignIn
@@ -89,7 +93,7 @@ var ViewManager = React.createClass({
     }.bind(this));
   },
 
-  render: function() {
+  render: function () {
     var route = this.state.route;
     var email = this.state.user.get("email");
     var component;
@@ -108,7 +112,7 @@ var ViewManager = React.createClass({
       );
     }
 
-
+    /* jscs:disable disallowTrailingWhitespace, validateQuoteMarks */
     /* jshint trailing:false, quotmark:false, newcap:false */
     return (
       <div className="container">

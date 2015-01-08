@@ -21,6 +21,7 @@
     "broccoli-concat": "0.0.12",
     "broccoli-env": "0.0.1",
     "broccoli-export-tree": "^0.3.2",
+    "broccoli-jscs": "0.0.13",
     "broccoli-jshint": "^0.5.3",
     "broccoli-less": "^2.0.0",
     "broccoli-merge-trees": "^0.2.1",

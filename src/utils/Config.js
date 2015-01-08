@@ -4,7 +4,7 @@ var Config = {
 };
 
 // @@ENV gets replaced by Broccoli
-if ( "@@ENV" === "production") {
+if ("@@ENV" === "production") {
   Config.baseUrl = "http://localhost:9000/";
   Config.env = "production";
 }

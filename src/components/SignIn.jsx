@@ -41,11 +41,12 @@ var SignIn = React.createClass({
     });
   },
 
-  render: function() {
+  render: function () {
     console.log("Rendered: " + this.props.route);
 
     var model = this.props.model;
 
+    /* jscs:disable disallowTrailingWhitespace, validateQuoteMarks */
     /* jshint trailing:false, quotmark:false, newcap:false */
     return (
       <form

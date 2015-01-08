@@ -6,6 +6,7 @@ var concatCSS = require("broccoli-concat");
 var env = require("broccoli-env").getEnv();
 var exportTree = require("broccoli-export-tree");
 var filterReact = require("broccoli-react");
+var jscs = require("broccoli-jscs");
 var jsHintTree = require("broccoli-jshint");
 var less = require("broccoli-less");
 var mergeTrees = require("broccoli-merge-trees");
@@ -37,6 +38,24 @@ var fileNames = {
 var tasks = {
 
   jsHint: function (jsTree) {
+    // run jscs on compiled js
+    var jscsTree = jscs(jsTree, {
+      logError: function (message) {
+        switch (env) {
+          case "production":
+            console.log(message + "\n");
+            // fail build in production
+            throw new Error("jscs failed, see messages above");
+          default:
+            // use pretty colors in test and development mode
+            console.log(chalk.red(message) + "\n");
+            break;
+        }
+      },
+      disableTestGenerator: false,
+      enabled: true
+    });
+
     // run jshint on compiled js
     var hintTree = jsHintTree(jsTree , {
       logError: function (message) {
@@ -60,7 +79,7 @@ var tasks = {
     });
 
     return mergeTrees(
-      [hintTree, jsTree],
+      [jscsTree, hintTree, jsTree],
       { overwrite: true }
     );
   },
@@ -205,7 +224,7 @@ function createJsTree() {
  */
 var buildTree = _.compose(tasks.jsHint, createJsTree);
 
-// export BROCCOLI_ENV={default:"development"|"production"}
+// export BROCCOLI_ENV={ default: "development" | "production" }
 if (env === "development" || env === "production" ) {
   // add steps used in both development and production
   buildTree = _.compose(

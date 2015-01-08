@@ -9,6 +9,7 @@ var Router = require("./models/Router");
 
 var globalRouter = new Router();
 
+/* jscs:disable disallowTrailingWhitespace, validateQuoteMarks */
 /* jshint trailing:false, quotmark:false, newcap:false */
 React.render(
   <ViewManager router={globalRouter} />,

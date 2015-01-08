@@ -6,11 +6,11 @@ var Service = require("../utils/Service");
 
 var User = Backbone.Model.extend({
 
-  initialize: function() {
+  initialize: function () {
     _.bindAll(this, "login", "logout", "isLoggedIn");
   },
 
-  defaults: function() {
+  defaults: function () {
     return {
       email: null,
       password: null

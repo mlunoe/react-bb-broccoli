@@ -11,14 +11,15 @@ var Hello = React.createClass({
     person: React.PropTypes.instanceOf(Person).isRequired
   },
 
-  handleClick: function(event) {
+  handleClick: function (event) {
     event.preventDefault();
     alert("You clicked ‘" + this.props.person.get("name") + "’!");
 
   },
 
-  render: function() {
+  render: function () {
 
+    /* jscs:disable disallowTrailingWhitespace, validateQuoteMarks */
     /* jshint trailing:false, quotmark:false, newcap:false */
     return (
       <div

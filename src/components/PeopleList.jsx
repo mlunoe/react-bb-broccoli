@@ -21,16 +21,17 @@ var PeopleList = React.createClass({
 
   mixins: [BackboneMixin],
 
-  getDefaultProps: function() {
+  getDefaultProps: function () {
     return {
       name: "List of People"
     };
   },
 
-  render: function() {
+  render: function () {
     console.log("Rendered: " + this.props.route);
     var peopleList = this.props.collection.map(function (person) {
 
+      /* jscs:disable disallowTrailingWhitespace, validateQuoteMarks */
       /* jshint trailing:false, quotmark:false, newcap:false */
       return (
         <Hello key={person.id} person={person} />
