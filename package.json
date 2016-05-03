@@ -3,6 +3,7 @@
   "description": "React and Backbone with Broccoli",
   "author": "Michael Lunøe <michael.lunoe@gmail.com>",
   "version": "0.1.0",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/mlunoe/react-bb-broccoli"
