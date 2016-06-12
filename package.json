@@ -32,7 +32,7 @@
     "broccoli-uglify-js": "^0.1.3",
     "broccoli-webpack": "^0.1.1",
     "chalk": "^0.5.1",
-    "cheerio": "^0.18.0",
+    "cheerio": "^0.21.0",
     "greenkeeper-shrinkwrap": "git+https://github.com/greenkeeperio/greenkeeper-shrinkwrap.git#79a90a71151ede5f7bd1d6da3a4948bfa3fc1c11",
     "mocha": "^2.1.0",
     "mocha-teamcity-reporter": "0.0.4",
