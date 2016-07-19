@@ -35,7 +35,7 @@
     "cheerio": "^0.18.0",
     "greenkeeper-shrinkwrap": "git+https://github.com/greenkeeperio/greenkeeper-shrinkwrap.git#79a90a71151ede5f7bd1d6da3a4948bfa3fc1c11",
     "mocha": "^2.1.0",
-    "mocha-teamcity-reporter": "0.0.4",
+    "mocha-teamcity-reporter": "1.0.2",
     "sinon": "^1.12.2"
   },
   "scripts": {
