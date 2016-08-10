@@ -25,7 +25,7 @@
     "broccoli-jscs": "0.0.13",
     "broccoli-jshint": "^0.5.3",
     "broccoli-less": "^2.0.0",
-    "broccoli-merge-trees": "^0.2.1",
+    "broccoli-merge-trees": "^1.1.4",
     "broccoli-react": "^0.7.0",
     "broccoli-replace": "^0.2.0",
     "broccoli-static-compiler": "^0.1.4",
