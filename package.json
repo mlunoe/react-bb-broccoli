@@ -19,7 +19,7 @@
     "broccoli": "0.16.9",
     "broccoli-asset-rev": "^2.0.0",
     "broccoli-clean-css": "^0.3.0",
-    "broccoli-concat": "0.0.12",
+    "broccoli-concat": "3.2.0",
     "broccoli-env": "0.0.1",
     "broccoli-export-tree": "^0.3.2",
     "broccoli-jscs": "0.0.13",
