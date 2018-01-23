@@ -1,18 +1,20 @@
 /** @jsx React.DOM */
 
+var createReactClass = require("create-react-class");
 var React = require("react");
+var PropTypes = require("prop-types");
 
 var BackboneMixin = require("../mixins/BackboneMixin.js");
 var Hello = require("../components/Hello");
 var People = require("../models/People");
 
-var PeopleList = React.createClass({
+var PeopleList = createReactClass({
   displayName: "People",
 
   propTypes: {
-    collection: React.PropTypes.instanceOf(People).isRequired,
-    route: React.PropTypes.string.isRequired,
-    name: React.PropTypes.string
+    collection: PropTypes.instanceOf(People).isRequired,
+    route: PropTypes.string.isRequired,
+    name: PropTypes.string
   },
 
   getBackboneModels: function () {

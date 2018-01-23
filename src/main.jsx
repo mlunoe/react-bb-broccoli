@@ -2,6 +2,7 @@
 
 var Backbone = require("backbone");
 var React = require("react");
+var ReactDOM = require("react-dom");
 
 var ViewManager = require("./components/ViewManager");
 
@@ -11,9 +12,9 @@ var globalRouter = new Router();
 
 /* jscs:disable disallowTrailingWhitespace, validateQuoteMarks */
 /* jshint trailing:false, quotmark:false, newcap:false */
-React.render(
+ReactDOM.render(
   <ViewManager router={globalRouter} />,
-  document.body
+  document.getElementById("application")
 );
 
 Backbone.history.start();

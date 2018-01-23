@@ -1,14 +1,16 @@
 /** @jsx React.DOM */
 
+var createReactClass = require("create-react-class");
 var React = require("react");
+var PropTypes = require("prop-types");
 
 var Person = require("../models/Person");
 
-var Hello = React.createClass({
+var Hello = createReactClass({
   displayName: "Hello",
 
   propTypes: {
-    person: React.PropTypes.instanceOf(Person).isRequired
+    person: PropTypes.instanceOf(Person).isRequired
   },
 
   handleClick: function (event) {

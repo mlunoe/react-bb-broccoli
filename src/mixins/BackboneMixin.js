@@ -1,27 +1,23 @@
-var _ = require("underscore");
-
 var BackboneMixin = {
   resolveModels: function () {
     var models = [];
 
     var name = this.constructor.displayName || "ANNOYMUS";
 
-    if (_.isFunction(this.getBackboneModels)) {
+    if (typeof this.getBackboneModels === "function") {
       var manualModels = this.getBackboneModels();
-      if (!_.isArray(manualModels)) {
+      if (Object.prototype.toString.call(manualModels) !== "[object Array]") {
         console.warn(
           "Component " + name + " needs to return an Array, not an " +
           typeof manualModels + ", for BackboneMixin to work."
         );
       } else {
         // filter out undefined/null's
-        models = _.filter(manualModels,
-          function (model) {
-            if (model != null) {
-              return model;
-            }
+        models = manualModels.filter(function (model) {
+          if (model != null) {
+            return model;
           }
-        );
+        });
       }
     } else {
       console.warn(

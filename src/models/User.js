@@ -1,5 +1,4 @@
 var Backbone = require("backbone");
-var _ = require("underscore");
 
 var Config = require("../utils/Config");
 var Service = require("../utils/Service");
@@ -7,27 +6,26 @@ var Service = require("../utils/Service");
 var User = Backbone.Model.extend({
 
   initialize: function () {
-    _.bindAll(this, "login", "logout", "isLoggedIn");
+    this.login = this.login.bind(this);
+    this.logout = this.logout.bind(this);
+    this.isLoggedIn = this.isLoggedIn.bind(this);
   },
 
   defaults: function () {
     return {
-      email: null,
-      password: null
+      email: "",
+      password: ""
     };
   },
 
   getSignInData: function () {
-    return _.reduce(
-      ["email", "password"],
-      function (obj, item) {
-        if (!_.isEmpty(this.get(item))) {
-          obj[item] = this.get(item);
-        }
-        return obj;
-      }.bind(this),
-      {}
-    );
+    return ["email", "password"].reduce(function (obj, item) {
+      if (!this.get(item)) {
+        obj[item] = this.get(item);
+      }
+
+      return obj;
+    }.bind(this), {});
   },
 
   login: function (callback) {
@@ -52,7 +50,7 @@ var User = Backbone.Model.extend({
   },
 
   isLoggedIn: function () {
-    return this.get("email") != null;
+    return !this.get("email");
   },
 
   url: Config.baseUrl + "auth/user.json"

@@ -14,7 +14,6 @@ var pickFiles = require("broccoli-static-compiler");
 var replace = require("broccoli-replace");
 var uglifyJavaScript = require("broccoli-uglify-js");
 var webpackify = require("broccoli-webpack");
-var _ = require("underscore");
 
 var dirs = {
   distDir: "target",
@@ -114,11 +113,7 @@ var tasks = {
 
     // concatenate css
     cssTree = concatCSS(cssTree, {
-      inputFiles: [
-        "**/*.css",
-        "!" + dirs.stylesDist + "/" + fileNames.mainStyles + ".css",
-        dirs.stylesDist + "/" + fileNames.mainStyles + ".css"
-      ],
+      inputFiles: ["**/*.css"],
       outputFile: "/" + dirs.stylesDist + "/application.css",
     });
 
@@ -219,15 +214,30 @@ function createJsTree() {
   });
 }
 
+function compose() {
+  var args = arguments;
+  var start = args.length - 1;
+
+  return function () {
+    var i = start;
+    var result = args[start].apply(this, arguments);
+    while (i--) {
+      result = args[i].call(this, result);
+    }
+
+    return result;
+  };
+}
+
 /*
  * Start the build
  */
-var buildTree = _.compose(tasks.jsHint, createJsTree);
+var buildTree = compose(tasks.jsHint, createJsTree);
 
 // export BROCCOLI_ENV={ default: "development" | "production" }
 if (env === "development" || env === "production" ) {
   // add steps used in both development and production
-  buildTree = _.compose(
+  buildTree = compose(
     tasks.img,
     tasks.index,
     tasks.data,
@@ -239,7 +249,7 @@ if (env === "development" || env === "production" ) {
 
 if (env === "production") {
   // add steps that are exclusively used in production
-  buildTree = _.compose(
+  buildTree = compose(
     tasks.md5,
     tasks.minifyCSS,
     tasks.minifyJs,
@@ -251,7 +261,7 @@ if (env === "production") {
 // say to be served by another system.
 // This will make `broccoli serve` and `npm run serve` act as
 // `broccoli build target --watch`
-// buildTree = _.compose(
+// buildTree = compose(
 //   tasks.export,
 //   buildTree
 // );
