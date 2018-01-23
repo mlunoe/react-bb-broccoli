@@ -1,6 +1,8 @@
 /** @jsx React.DOM */
 
-var React = require("react/addons");
+var createReactClass = require("create-react-class");
+var React = require("react");
+var PropTypes = require("prop-types");
 
 var PeopleList = require("../components/PeopleList");
 var SignIn = require("../components/SignIn");
@@ -8,12 +10,12 @@ var People = require("../models/People");
 var User = require("../models/User");
 var Router = require("../models/Router");
 
-var ViewManager = React.createClass({
+var ViewManager = createReactClass({
 
   displayName: "ViewManager",
 
   propTypes: {
-    router: React.PropTypes.instanceOf(Router).isRequired
+    router: PropTypes.instanceOf(Router).isRequired
   },
 
   getInitialState: function () {

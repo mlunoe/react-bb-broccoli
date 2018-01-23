@@ -1,40 +1,51 @@
 /** @jsx React.DOM */
 
 var assert = require("assert");
-var cheerio = require("cheerio");
 var React = require("react");
+var ReactDOM = require("react-dom");
+const jsdom = require("jsdom");
+
+const { JSDOM } = jsdom;
 
 var Person = require("../../src/models/Person");
 var Hello = require("../../src/components/Hello");
-
-var $ = cheerio.load("<html><body></body></html>");
 
 module.exports = {
 
   "Hello": {
 
-    afterEach: function () {
-      $("body").empty();
+    beforeEach: function () {
+      const dom = new JSDOM("<html><body><div id='application'></div></body></html>");
+      window = dom.window;
+      document = dom.window.document;
     },
 
     "should render the component populated with data": function () {
-      var react = new Person({ id: 0, name: "React" });
+      var element = document.getElementById("application");
+      var react = new Person({ id: 1, name: "React" });
+
+      /* jshint trailing:false, quotmark:false, newcap:false */
+      var reactNode = ReactDOM.render(
+        <Hello person={react} />,
+        element
+      );
+
+      assert.equal(document.querySelectorAll(".clickable").length, 1);
+      assert.equal(document.querySelector(".clickable").textContent, "Hello, React!");
+    },
+
+    "should render the component populated with other data": function () {
+      var element = document.getElementById("application");
       var webpack = new Person({ id: 1, name: "Webpack" });
 
       /* jshint trailing:false, quotmark:false, newcap:false */
-      var reactNode = React.renderComponentToString(
-        <Hello person={react} />
-      );
-      var webpackNode = React.renderComponentToString(
-        <Hello person={webpack} />
+      var reactNode = ReactDOM.render(
+        <Hello person={webpack} />,
+        element
       );
 
-      $("body").append(reactNode);
-      $("body").append(webpackNode);
-
-      assert.equal($(".clickable").length, 2);
-      assert.equal($(".clickable").eq(0).children().eq(1).text(), "React");
-      assert.equal($(".clickable").eq(1).children().eq(1).text(), "Webpack");
+      assert.equal(document.querySelectorAll(".clickable").length, 1);
+      assert.equal(document.querySelector(".clickable").textContent, "Hello, Webpack!");
     }
   }
 };

@@ -18,7 +18,6 @@ Run the following commands install dependencies for setting up the [Broccoli](ht
 	git clone
 	cd react-bb-broccoli
 	npm install
-	npm install -g broccoli-cli # may need sudo
 
 	npm run serve
 

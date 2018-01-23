@@ -1,6 +1,3 @@
-var $ = require("jquery");
-var _ = require("underscore");
-
 var Service = {
   /*
    * Abstracted fn to make a request
@@ -8,23 +5,20 @@ var Service = {
    * optional data and a callback
    */
   request: function (url, method, data, callback) {
-    $.ajax({
-      url: url,
-      contentType: "application/json",
-      dataType: "json",
-      type: method,
-      data:  JSON.stringify(data),
-      success: function (response) {
-        if (callback && _.isFunction(callback.success)) {
-          callback.success(response);
-        }
-      },
-      error: function (mod, response) {
-        if (callback && _.isFunction(callback.error)) {
-          callback.error(response);
+    var oReq = new XMLHttpRequest();
+    oReq.onreadystatechange = function () {
+      if (oReq.readyState === 4) {
+        if (oReq.status === 200) {
+          if (callback && typeof callback.success === "function") {
+            callback.success(oReq.responseText);
+          }
+        } else if (callback && typeof callback.error === "function") {
+          callback.error(oReq.statusText);
         }
       }
-    });
+    };
+    oReq.open(method, url);
+    oReq.send(data);
   }
 };
 
